@@ -1,45 +1,71 @@
-﻿using Antlr4.Runtime;
-
-namespace EtAlii.Yagl.Tests;
+﻿namespace EtAlii.Yagl.Tests;
 
 public class GrammarTests
 {
-    private void Parse(string fileName)
+    [Fact]
+    public void Parse_Yagl_Simple()
     {
-        var content = File.ReadAllText(fileName);
-        var inputStream = new AntlrInputStream(content);
-        var lexer = new yaglLexer(inputStream);
-        var commonTokenStream = new CommonTokenStream(lexer);
-        var parser = new yaglParser(commonTokenStream);
+        // Arrange.
 
-        // Add an error listener to fail the test on syntax errors
-        parser.RemoveErrorListeners();
-        parser.AddErrorListener(new ThrowingErrorListener());
+        // Act.
+        var query = YaglParser.ParseFile(@"Examples\simple.yagl");
 
-        var context = parser.query();
+        // Assert.
+        Assert.NotNull(query);
     }
 
     [Fact]
-    public void Parse_Simple_Yagl()
+    public void Parse_Yagl_Projects()
     {
-        Parse(@"Examples\simple.yagl");
+        // Arrange.
+
+        // Act.
+        var query = YaglParser.ParseFile(@"Examples\projects.yagl");
+
+        // Assert.
+        Assert.NotNull(query);
     }
 
     [Fact]
-    public void Parse_Projects_Yagl()
+    public void Parse_Yagl_Structure()
     {
-        Parse(@"Examples\projects.yagl");
-    }
+        // Arrange.
 
-    [Fact]
-    public void Parse_Structure_Yagl()
-    {
-        Parse(@"Examples\structure.yagl");
+        // Act.
+        var query = YaglParser.ParseFile(@"Examples\structure.yagl");
+
+        // Assert.
+        Assert.NotNull(query);
     }
 
     [Fact]
     public void Parse_Wildcards_Yagl()
     {
-        Parse(@"Examples\wildcards.yagl");
+        // Arrange.
+
+        // Act.
+        var query = YaglParser.ParseFile(@"Examples\wildcards.yagl");
+
+        // Assert.
+        Assert.NotNull(query);
+    }
+
+    [Theory, MemberData(nameof(Parse_Yagl_All_Data))]
+    public void Parse_Yagl_All(string fileName)
+    {
+        // Arrange.
+
+        // Act.
+        var query = YaglParser.ParseFile(fileName);
+
+        // Assert.
+        Assert.NotNull(query);
+    }
+
+    public static IEnumerable<object[]> Parse_Yagl_All_Data()
+    {
+        return Directory
+            .EnumerateFiles(@"Examples", "*.yagl")
+            .Select(f => new object[] { f });
     }
 }
