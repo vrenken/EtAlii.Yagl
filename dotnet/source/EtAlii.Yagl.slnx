@@ -1,5 +1,6 @@
 <Solution>
   <Folder Name="/_Globals/">
+    <File Path="../../grammar/yagl.g4" />
     <File Path="../../grammar/yagl.pest" />
     <File Path="Directory.Build.props" />
     <File Path="Directory.Build.targets" />
