@@ -1,157 +1,75 @@
-grammar yagl;
+﻿grammar yagl;
 
-options {
-    caseInsensitive = true;
-}
-
-yagl
-    : sortedQuery EOF
+query
+    : element* EOF
     ;
 
-sortedQuery
-    : prefixAssignment sortedQuery
-    | scopedClause (SORTBY sortSpec)?
+element
+    : entity
     ;
 
-sortSpec
-    : sortSpec singleSpec
-    | singleSpec
+entity
+    : identifier (':' parameters)? body?
     ;
 
-singleSpec
-    : index modifierList?
+parameters
+    : parameter (',' parameter)*
     ;
 
-cqlQuery
-    : prefixAssignment cqlQuery
-    | scopedClause
+parameter
+    : identifier '=' value
     ;
 
-prefixAssignment
-    : '>' prefix_ '=' uri
-    | '>' uri
+value
+    : number
+    | STRING_LITERAL
+    | identifier
     ;
 
-scopedClause
-    : scopedClause booleanGroup searchClause
-    | searchClause
+body
+    : property_relation+
     ;
 
-booleanGroup
-    : boolean_ modifierList?
+property_relation
+    : '|' (wildcard | template | entity_ref) body?
     ;
 
-boolean_
-    : AND
-    | OR
-    | NOT
-    | PROX
+entity_ref
+    : identifier (':' parameters)?
     ;
 
-searchClause
-    : '(' cqlQuery ')'
-    | index relation searchTerm
-    | searchTerm
+template
+    : '#' identifier
     ;
 
-relation
-    : comparitor modifierList?
-    ;
-
-comparitor
-    : comparitorSymbol
-    | namedComparitor
-    ;
-
-comparitorSymbol
-    : '='
-    | '>'
-    | '<'
-    | '>='
-    | '<='
-    | '<>'
-    | '=='
-    ;
-
-namedComparitor
-    : identifier
-    ;
-
-modifierList
-    : modifierList modifier
-    | modifier
-    ;
-
-modifier
-    : '/' modifierName (comparitorSymbol modifierValue)?
-    ;
-
-prefix_
-    : term
-    ;
-
-uri
-    : term
-    ;
-
-modifierName
-    : term
-    ;
-
-modifierValue
-    : term
-    ;
-
-searchTerm
-    : term
-    ;
-
-index
-    : term
-    ;
-
-term
-    : identifier
-    | AND
-    | OR
-    | NOT
-    | PROX
-    | SORTBY
+wildcard
+    : identifier? '*' identifier?
     ;
 
 identifier
-    : CHARSTRING1
-    | CHARSTRING2
+    : IDENTIFIER
     ;
 
-AND
-    : 'AND'
+number
+    : NUMBER
     ;
 
-OR
-    : 'OR'
+IDENTIFIER
+    : [a-zA-Z_] [a-zA-Z0-9_]*
     ;
 
-NOT
-    : 'NOT'
+NUMBER
+    : '-'? [0-9]+
     ;
 
-PROX
-    : 'PROX'
+STRING_LITERAL
+    : '"' ( ~["\r\n] | '""' )* '"'
     ;
 
-SORTBY
-    : 'SORTBY'
-    ;
-
-CHARSTRING1
-    : [A-Z.]+
-    ;
-
-CHARSTRING2
-    : '"' .*? '"'
+COMMENT
+    : '//' ~[\r\n]* -> skip
     ;
 
 WS
-    : [ \r\n\t]+ -> skip
+    : [ \t\r\n]+ -> skip
     ;
