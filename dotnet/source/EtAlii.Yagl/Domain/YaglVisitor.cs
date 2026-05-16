@@ -1,9 +1,8 @@
-﻿using EtAlii.Yagl.Domain;
-using Antlr4.Runtime.Misc;
+﻿using Antlr4.Runtime.Misc;
 
-namespace EtAlii.Yagl.Projection;
+namespace EtAlii.Yagl;
 
-public class YaglProjectionVisitor : yaglBaseVisitor<object>
+public class YaglVisitor : yaglBaseVisitor<object>
 {
     public override object VisitQuery([NotNull] yaglParser.QueryContext context)
     {

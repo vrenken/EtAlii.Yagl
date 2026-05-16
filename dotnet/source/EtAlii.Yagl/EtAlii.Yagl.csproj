@@ -1,6 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <ItemGroup>
-        <Antlr4 Include="..\..\..\grammar\yagl.g4" Package="EtAlii.Yagl" />
+        <Antlr4 
+          Include="..\..\..\grammar\yagl.g4" 
+          Package="EtAlii.Yagl" >
+          <Link>Grammar\%(Filename)%(Extension)</Link>
+        </Antlr4>
     </ItemGroup>
 
     <ItemGroup>
