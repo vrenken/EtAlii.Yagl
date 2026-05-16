@@ -11,6 +11,9 @@ indent_style = space
 indent_size = 4
 tab_width = 4
 
+# Enforce one class per file (requires StyleCop.Analyzers)
+dotnet_diagnostic.SA1402.severity = warning
+
 # Microsoft .NET coding conventions
 dotnet_sort_system_directives_first = true
 dotnet_separate_import_directive_groups = false
