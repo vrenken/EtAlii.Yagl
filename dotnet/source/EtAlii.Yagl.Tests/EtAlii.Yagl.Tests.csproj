@@ -25,4 +25,12 @@
         <Using Include="Xunit"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <Content 
+        Include="..\..\..\examples\*.yagl"
+        CopyToOutputDirectory="PreserveNewest">
+        <Link>Examples\%(Filename)%(Extension)</Link>
+      </Content>
+    </ItemGroup>
+
 </Project>
