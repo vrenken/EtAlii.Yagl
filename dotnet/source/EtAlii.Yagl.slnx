@@ -1,10 +1,18 @@
 <Solution>
   <Folder Name="/_Globals/">
-    <File Path="../../grammar/yagl.g4" />
-    <File Path="../../grammar/yagl.pest" />
     <File Path="Directory.Build.props" />
     <File Path="Directory.Build.targets" />
     <File Path="Directory.Packages.props" />
+  </Folder>
+  <Folder Name="/_Globals/examples/">
+    <File Path="../../examples/projects.yagl" />
+    <File Path="../../examples/simple.yagl" />
+    <File Path="../../examples/structure.yagl" />
+    <File Path="../../examples/wildcards.yagl" />
+  </Folder>
+  <Folder Name="/_Globals/grammars/">
+    <File Path="../../grammar/yagl.g4" />
+    <File Path="../../grammar/yagl.pest" />
   </Folder>
   <Project Path="EtAlii.Yagl.Tests/EtAlii.Yagl.Tests.csproj" />
   <Project Path="EtAlii.Yagl/EtAlii.Yagl.csproj" />
