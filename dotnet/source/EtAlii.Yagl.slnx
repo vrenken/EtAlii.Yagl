@@ -12,6 +12,7 @@
     <File Path="../../examples/projects.yagl" />
     <File Path="../../examples/simple.yagl" />
     <File Path="../../examples/structure.yagl" />
+    <File Path="../../examples/whitespace.yagl" />
     <File Path="../../examples/wildcards.yagl" />
   </Folder>
   <Folder Name="/_Globals/grammars/">
