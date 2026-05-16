@@ -1,0 +1,6 @@
+WildcardTest
+| prefix*
+| *suffix
+| start*end
+| *
+| simple_identifier

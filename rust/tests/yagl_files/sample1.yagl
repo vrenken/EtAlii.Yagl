@@ -1,0 +1,11 @@
+// Simple User definition
+User:id=1
+| Name
+| Email
+
+// Simple Project definition
+Project:title="My Project"
+| Members
+    | Name
+| Tasks
+    | Status

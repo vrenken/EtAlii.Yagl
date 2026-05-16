@@ -1,0 +1,47 @@
+// This is a comment to describe that the below lines
+user:Id=123
+| Id
+| Profile
+    | Email
+    | Name
+
+// Returns all requirements, unless used as a template below another entity.
+Requirements
+| Id
+| Name
+| Status
+| MetaData
+    | Description
+    | Keywords
+
+// Returns all users, unless used as a template below another entity.
+Users
+| Id
+| Name
+| Email
+
+// Returns the project with id 123, the users, and the requirements with the status open.
+Project:id=123
+| Users
+    | Id
+    | Name
+    | Email
+| Requirements:Status=Open
+    | Id
+    | Name
+    | Status
+    | MetaData
+        | Description
+        | Keywords
+
+
+// Returns the project with id 123, and users and requirements as specified in the above definitions.
+Project:id=123
+| #Users
+| #Requirements
+
+// Returns the project, its users and requirements, and any other properties or relations.
+Project:id=123
+| #Users
+| #Requirements
+| *
