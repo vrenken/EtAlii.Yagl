@@ -1,5 +1,8 @@
 <Solution>
   <Folder Name="/_Globals/">
+    <File Path="../CONTRIBUTING.md" />
+    <File Path="../../LICENSE" />
+    <File Path="../../README.md" />
     <File Path=".editorconfig" />
     <File Path="Directory.Build.props" />
     <File Path="Directory.Build.targets" />
