@@ -1,13 +1,16 @@
 ﻿grammar yagl;
 
+// This is the root query.
 query
     : element* EOF
     ;
 
+// An element in the query.
 element
     : entity
     ;
 
+// An entity in the query.
 entity
     : identifier (':' parameters)? body?
     ;
