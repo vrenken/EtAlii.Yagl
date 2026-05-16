@@ -71,19 +71,13 @@ public class YaglVisitor : yaglBaseVisitor<object>
 
     public override object VisitProperty_relation([NotNull] yaglParser.Property_relationContext context)
     {
-        IPropertyRelationContent content = null;
-        if (context.wildcard() != null)
+        var content = context switch
         {
-            content = (IPropertyRelationContent)VisitWildcard(context.wildcard());
-        }
-        else if (context.template() != null)
-        {
-            content = (IPropertyRelationContent)VisitTemplate(context.template());
-        }
-        else if (context.entity_ref() != null)
-        {
-            content = (IPropertyRelationContent)VisitEntity_ref(context.entity_ref());
-        }
+            {} c when c.wildcard() != null => (IPropertyRelationContent)VisitWildcard(c.wildcard()),
+            {} c when c.template() != null => (IPropertyRelationContent)VisitTemplate(c.template()),
+            {} c when c.entity_ref() != null => (IPropertyRelationContent)VisitEntity_ref(c.entity_ref()),
+            _ => throw new InvalidOperationException("Unknown property relation content type")
+        };
 
         var body = context.body() != null ? (Body)VisitBody(context.body()) : null;
         return new PropertyRelation(content, body);
