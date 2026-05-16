@@ -1,1 +1,10 @@
-<Solution />
+<Solution>
+  <Folder Name="/_Globals/">
+    <File Path="../../grammar/yagl.pest" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Build.targets" />
+    <File Path="Directory.Packages.props" />
+  </Folder>
+  <Project Path="EtAlii.Yagl.Tests/EtAlii.Yagl.Tests.csproj" />
+  <Project Path="EtAlii.Yagl/EtAlii.Yagl.csproj" />
+</Solution>
