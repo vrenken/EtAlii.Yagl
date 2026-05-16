@@ -1,0 +1,27 @@
+WHITESPACE = _{ " " | "\t" | "\r" | "\n" }
+COMMENT = _{ "//" ~ (!"\n" ~ ANY)* }
+
+program = { SOI ~ element* ~ EOI }
+
+element = { entity }
+
+entity = { identifier ~ (":" ~ parameters)? ~ body? }
+
+parameters = { parameter ~ ("," ~ parameter)* }
+parameter = { identifier ~ "=" ~ value }
+
+value = { number | string_literal | identifier }
+
+body = { property_relation+ }
+
+property_relation = { "|" ~ (wildcard | template | entity_ref) ~ body? }
+
+entity_ref = { identifier ~ (":" ~ parameters)? }
+
+template = { "#" ~ identifier }
+
+wildcard = { identifier? ~ "*" ~ identifier? }
+
+identifier = @{ (ASCII_ALPHA | "_") ~ (ASCII_ALPHANUMERIC | "_")* }
+number = @{ "-"? ~ ASCII_DIGIT+ }
+string_literal = @{ "\"" ~ (!"\"" ~ ANY)* ~ "\"" }
