@@ -1,0 +1,9 @@
+// Complex definition with templates and wildcards
+Team:name="Developers"
+| #Users
+| *
+
+// References
+Department
+| #Team
+| Location
