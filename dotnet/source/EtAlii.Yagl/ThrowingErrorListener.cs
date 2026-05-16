@@ -1,6 +1,6 @@
 ﻿using Antlr4.Runtime;
 
-namespace EtAlii.Yagl.Tests;
+namespace EtAlii.Yagl;
 
 public class ThrowingErrorListener : BaseErrorListener
 {
